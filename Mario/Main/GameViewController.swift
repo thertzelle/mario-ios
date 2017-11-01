@@ -1,11 +1,3 @@
-//
-//  GameViewController.swift
-//  Mario
-//
-//  Created by HERTZELLE, TODD [AG/1000] on 11/1/17.
-//  Copyright © 2017 Monsanto. All rights reserved.
-//
-
 import UIKit
 import SpriteKit
 import GameplayKit

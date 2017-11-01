@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5A35EEF01FAA78B200B31423 /* Mario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A35EEEF1FAA78B200B31423 /* Mario.swift */; };
 		5AF8AAD21FAA6A490038261B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF8AAD11FAA6A490038261B /* AppDelegate.swift */; };
 		5AF8AAD41FAA6A490038261B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5AF8AAD31FAA6A490038261B /* GameScene.sks */; };
-		5AF8AAD61FAA6A490038261B /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5AF8AAD51FAA6A490038261B /* Actions.sks */; };
 		5AF8AAD81FAA6A490038261B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF8AAD71FAA6A490038261B /* GameScene.swift */; };
 		5AF8AADA1FAA6A490038261B /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF8AAD91FAA6A490038261B /* GameViewController.swift */; };
 		5AF8AADD1FAA6A490038261B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AF8AADB1FAA6A490038261B /* Main.storyboard */; };
@@ -18,10 +18,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5A35EEEF1FAA78B200B31423 /* Mario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mario.swift; sourceTree = "<group>"; };
 		5AF8AACE1FAA6A490038261B /* Mario.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mario.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AF8AAD11FAA6A490038261B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5AF8AAD31FAA6A490038261B /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		5AF8AAD51FAA6A490038261B /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		5AF8AAD71FAA6A490038261B /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		5AF8AAD91FAA6A490038261B /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		5AF8AADC1FAA6A490038261B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -41,6 +41,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5A3B14D41FAA6BDB00E0A5A4 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				5AF8AAD71FAA6A490038261B /* GameScene.swift */,
+				5AF8AAD91FAA6A490038261B /* GameViewController.swift */,
+				5AF8AADB1FAA6A490038261B /* Main.storyboard */,
+				5A35EEEF1FAA78B200B31423 /* Mario.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		5AF8AAC51FAA6A490038261B = {
 			isa = PBXGroup;
 			children = (
@@ -60,17 +71,22 @@
 		5AF8AAD01FAA6A490038261B /* Mario */ = {
 			isa = PBXGroup;
 			children = (
-				5AF8AAD11FAA6A490038261B /* AppDelegate.swift */,
+				5A3B14D41FAA6BDB00E0A5A4 /* Main */,
+				5AF8AAE91FAA6A520038261B /* Supporting Files */,
 				5AF8AAD31FAA6A490038261B /* GameScene.sks */,
-				5AF8AAD51FAA6A490038261B /* Actions.sks */,
-				5AF8AAD71FAA6A490038261B /* GameScene.swift */,
-				5AF8AAD91FAA6A490038261B /* GameViewController.swift */,
-				5AF8AADB1FAA6A490038261B /* Main.storyboard */,
 				5AF8AADE1FAA6A490038261B /* Assets.xcassets */,
 				5AF8AAE01FAA6A490038261B /* LaunchScreen.storyboard */,
 				5AF8AAE31FAA6A490038261B /* Info.plist */,
 			);
 			path = Mario;
+			sourceTree = "<group>";
+		};
+		5AF8AAE91FAA6A520038261B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5AF8AAD11FAA6A490038261B /* AppDelegate.swift */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -136,7 +152,6 @@
 				5AF8AAD41FAA6A490038261B /* GameScene.sks in Resources */,
 				5AF8AADF1FAA6A490038261B /* Assets.xcassets in Resources */,
 				5AF8AAE21FAA6A490038261B /* LaunchScreen.storyboard in Resources */,
-				5AF8AAD61FAA6A490038261B /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,6 +164,7 @@
 			files = (
 				5AF8AAD81FAA6A490038261B /* GameScene.swift in Sources */,
 				5AF8AADA1FAA6A490038261B /* GameViewController.swift in Sources */,
+				5A35EEF01FAA78B200B31423 /* Mario.swift in Sources */,
 				5AF8AAD21FAA6A490038261B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
