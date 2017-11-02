@@ -5,7 +5,7 @@ class GameScene: SKScene {
     
     private var mario : SKSpriteNode?
     private var marioWalking: SKAction?
-    private var ground : SKSpriteNode?
+    private var ground : SKNode?
 //    private var spinnyNode : SKShapeNode?
     
     
@@ -17,22 +17,19 @@ class GameScene: SKScene {
         
         // Get label node from scene and store it for use later
         self.mario = self.childNode(withName: "mario") as? SKSpriteNode
-        self.mario?.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: mario?.frame.width ?? 0, height: mario?.frame.height ?? 0))
+//        self.mario?.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: mario?.frame.width ?? 0, height: mario?.frame.height ?? 0))
         
-        self.ground = self.childNode(withName: "ground") as? SKSpriteNode
-        self.ground?.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: ground?.frame.width ?? 0, height: ground?.frame.height ?? 0))
-        self.ground?.physicsBody?.affectedByGravity = false
-        self.ground?.physicsBody?.isDynamic = false
+        self.ground = self.childNode(withName: "ground")
+//        self.ground?.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: ground?.frame.width ?? 0, height: ground?.frame.height ?? 0))
+//        self.ground?.physicsBody?.affectedByGravity = false
+//        self.ground?.physicsBody?.isDynamic = false
         
         self.marioWalking = SKAction(named: "mario_walking")
-        
-        
-        
-        let walkAciton = SKAction.repeatForever(SKAction.animate(with: [SKTexture(imageNamed: "mario_2"), SKTexture(imageNamed: "mario_3"), SKTexture(imageNamed: "mario_4")], timePerFrame: 0.00003))
+
+        let walkAciton = SKAction.repeatForever(SKAction.animate(with: [SKTexture(imageNamed: "mario_walk_1"), SKTexture(imageNamed: "mario_walk_2"), SKTexture(imageNamed: "mario_walk_3")], timePerFrame: 0.03))
         
         mario?.run(walkAciton)
-        
-        
+        ground?.run(SKAction.repeatForever(SKAction.moveBy(x: -200.0, y: 0.0, duration: 1.0)))
     }
     
     
