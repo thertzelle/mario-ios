@@ -79,8 +79,10 @@ class GameScene: SKScene {
     
     
     func touchDown(atPoint pos : CGPoint) {
-        mario?.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 500))
+        if !marioIsJumping {
+        mario?.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 450))
         makeMarioJump()
+        }
 //        self.mario?.physicsBody?.velocity = CGVector(dx: 0, dy: 100)
     }
 //
@@ -145,6 +147,7 @@ extension GameScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         if marioIsJumping {
             makeMarioRun()
+            marioIsJumping = false
         }
     }
 }

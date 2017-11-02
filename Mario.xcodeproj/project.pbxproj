@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5A35EEF01FAA78B200B31423 /* Mario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A35EEEF1FAA78B200B31423 /* Mario.swift */; };
+		5ABBD8A21FAB9AAD006E1CC5 /* mario.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5ABBD8A11FAB9AAD006E1CC5 /* mario.mp3 */; };
 		5AF8AAD21FAA6A490038261B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF8AAD11FAA6A490038261B /* AppDelegate.swift */; };
 		5AF8AAD41FAA6A490038261B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5AF8AAD31FAA6A490038261B /* GameScene.sks */; };
 		5AF8AAD81FAA6A490038261B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF8AAD71FAA6A490038261B /* GameScene.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		5A35EEEF1FAA78B200B31423 /* Mario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mario.swift; sourceTree = "<group>"; };
+		5ABBD8A11FAB9AAD006E1CC5 /* mario.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mario.mp3; sourceTree = "<group>"; };
 		5AF8AACE1FAA6A490038261B /* Mario.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mario.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AF8AAD11FAA6A490038261B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5AF8AAD31FAA6A490038261B /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				5AF8AADE1FAA6A490038261B /* Assets.xcassets */,
 				5AF8AAE01FAA6A490038261B /* LaunchScreen.storyboard */,
 				5AF8AAE31FAA6A490038261B /* Info.plist */,
+				5ABBD8A11FAB9AAD006E1CC5 /* mario.mp3 */,
 			);
 			path = Mario;
 			sourceTree = "<group>";
@@ -150,6 +153,7 @@
 			files = (
 				5AF8AADD1FAA6A490038261B /* Main.storyboard in Resources */,
 				5AF8AAD41FAA6A490038261B /* GameScene.sks in Resources */,
+				5ABBD8A21FAB9AAD006E1CC5 /* mario.mp3 in Resources */,
 				5AF8AADF1FAA6A490038261B /* Assets.xcassets in Resources */,
 				5AF8AAE21FAA6A490038261B /* LaunchScreen.storyboard in Resources */,
 			);
