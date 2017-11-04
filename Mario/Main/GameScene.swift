@@ -13,33 +13,49 @@ class GameScene: SKScene {
     private var mario : SKSpriteNode?
     private var marioWalking: SKAction?
     private var walkAction: SKAction?
-    private var ground : SKNode?
+    private var level : SKNode?
 //    private var spinnyNode : SKShapeNode?
     
     let floorCategory: UInt32 = 0x1 << 0;
     let marioCategory: UInt32 = 0x1 << 1;
+    let goombaCategory: UInt32 = 0x1 << 1;
+    let goombaHeadCategory: UInt32 = 0x1 << 2;
+    let flagCategory: UInt32 = 0x1 << 3;
     
     var marioIsJumping = false
     var marioIsDead = false
     
     
     override func update(_ currentTime: TimeInterval) {
-//        self.mario?.physicsBody?.velocity = CGVector(dx: 200, dy: 0)
         guard let mario = mario else { return }
         if (mario.position.y < -700 || mario.position.x < -350) && marioIsDead == false {
-            let music = mario.childNode(withName: "music")
-            music?.run(SKAction.stop())
-            marioIsDead = true
-            mario.removeAllActions()
-            mario.texture = SKTexture(imageNamed: "mario_dead")
-            ground?.removeAction(forKey: "levelScroller")
-            mario.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 450))
-            run(SKAction.playSoundFileNamed("dead", waitForCompletion: true), completion: { [weak self] in
-                
-                self?.gameSceneDelegate?.gameOver()
-            })
+            killMario()
         }
     }
+    
+    
+    func killMario() {
+        stopAllEnemies()
+        guard let mario = mario else { return }
+        let music = mario.childNode(withName: "music")
+        music?.run(SKAction.stop())
+        marioIsDead = true
+        mario.removeAllActions()
+        mario.texture = SKTexture(imageNamed: "mario_dead")
+        level?.removeAction(forKey: "levelScroller")
+        mario.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 550))
+        run(SKAction.playSoundFileNamed("dead", waitForCompletion: true), completion: { [weak self] in
+            
+            self?.gameSceneDelegate?.gameOver()
+        })
+    }
+    
+    func stopAllEnemies() {
+        level?.childNode(withName: "Enemies")?.children.forEach({ goomba in
+            goomba.removeAllActions()
+        })
+    }
+    
 //        }
 //    }
     
@@ -57,8 +73,8 @@ class GameScene: SKScene {
         self.mario?.physicsBody?.collisionBitMask = floorCategory
         self.mario?.physicsBody?.allowsRotation = false
         
-        self.ground = self.childNode(withName: "ground")
-        self.ground?.children.forEach({ node in
+        self.level = self.childNode(withName: "level")
+        self.level?.childNode(withName: "ground")?.children.forEach({ node in
             node.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: node.frame.width, height: node.frame.height))
             node.physicsBody?.isDynamic = false
             node.physicsBody?.affectedByGravity = false
@@ -66,11 +82,36 @@ class GameScene: SKScene {
             node.physicsBody?.contactTestBitMask = marioCategory
             node.physicsBody?.collisionBitMask = marioCategory
         })
-//        self.ground?.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: ground?.frame.width ?? 0, height: ground?.frame.height ?? 0))
-//        self.ground?.physicsBody?.affectedByGravity = false
-//        self.ground?.physicsBody?.isDynamic = false
         makeMarioRun()
-        ground?.run(SKAction.repeatForever(SKAction.moveBy(x: -200.0, y: 0.0, duration: 1.0)), withKey: "levelScroller")
+        level?.run(SKAction.repeatForever(SKAction.moveBy(x: -200.0, y: 0.0, duration: 1.0)), withKey: "levelScroller")
+        
+        level?.childNode(withName: "Enemies")?.children.forEach({ goomba in
+            goomba.run(SKAction.repeatForever(SKAction.animate(with: [SKTexture(imageNamed: "bad_guy_1"), SKTexture(imageNamed: "bad_guy_2")], timePerFrame: 1.0)))
+            goomba.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: goomba.frame.width, height: goomba.frame.height))
+            goomba.physicsBody?.allowsRotation = false
+            goomba.physicsBody?.categoryBitMask = goombaCategory
+            goomba.physicsBody?.contactTestBitMask = marioCategory | goombaCategory
+            goomba.physicsBody?.collisionBitMask = floorCategory | marioCategory | goombaCategory
+            
+            goomba.run(SKAction.repeatForever(SKAction.sequence([SKAction.moveBy(x: -100.0, y: 0.0, duration: 10.0), SKAction.moveBy(x: 100.0, y: 0.0, duration: 10.0)])))
+            
+            let head = goomba.childNode(withName: "Head")
+            head?.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: head?.frame.width ?? 0, height: head?.frame.height ?? 0))
+            head?.physicsBody?.allowsRotation = false
+            head?.physicsBody?.pinned = true
+            head?.physicsBody?.categoryBitMask = goombaHeadCategory
+            head?.physicsBody?.collisionBitMask = marioCategory
+            head?.physicsBody?.contactTestBitMask = marioCategory
+           
+            
+        })
+        
+        let flag = level?.childNode(withName: "Scenery")?.childNode(withName: "Flag")
+        flag?.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: flag?.frame.width ?? 0, height: flag?.frame.height ?? 0))
+        flag?.physicsBody?.allowsRotation = false
+        flag?.physicsBody?.categoryBitMask = flagCategory
+        flag?.physicsBody?.collisionBitMask = marioCategory
+        flag?.physicsBody?.contactTestBitMask = marioCategory
         
     }
     
@@ -162,9 +203,27 @@ extension SKAction {
 
 extension GameScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
-        if marioIsJumping {
+        
+        
+        if contact.bodyA.categoryBitMask == floorCategory && contact.bodyB.categoryBitMask == marioCategory && marioIsJumping {
             makeMarioRun()
             marioIsJumping = false
+        }
+        
+        if contact.bodyA.categoryBitMask == marioCategory && contact.bodyB.categoryBitMask == goombaHeadCategory {
+            print("Goomba Head")
+            let goombaToKill = contact.bodyB.node?.parent
+            goombaToKill?.physicsBody = nil
+            let sound = SKAction.playSoundFileNamed("stomp", waitForCompletion: true)
+            run(sound)
+            goombaToKill?.run(SKAction.animate(with: [SKTexture(imageNamed: "bad_guy_3")], timePerFrame: 0.09), completion: {
+                goombaToKill?.removeFromParent()
+            })
+        }
+        
+        if contact.bodyA.categoryBitMask == marioCategory && contact.bodyB.categoryBitMask == goombaCategory && marioIsDead == false {
+            print("Goomba Kill")
+            killMario()
         }
     }
 }
