@@ -9,6 +9,7 @@ class GameScene: SKScene {
     
     weak var gameSceneDelegate: GameSceneDelegate?
     
+    private var music: SKAction?
     private var mario : SKSpriteNode?
     private var marioWalking: SKAction?
     private var walkAction: SKAction?
@@ -19,18 +20,31 @@ class GameScene: SKScene {
     let marioCategory: UInt32 = 0x1 << 1;
     
     var marioIsJumping = false
+    var marioIsDead = false
     
     
     override func update(_ currentTime: TimeInterval) {
 //        self.mario?.physicsBody?.velocity = CGVector(dx: 200, dy: 0)
-        if mario!.position.y < -700 {
-            gameSceneDelegate?.gameOver()
+        guard let mario = mario else { return }
+        if (mario.position.y < -700 || mario.position.x < -350) && marioIsDead == false {
+            let music = mario.childNode(withName: "music")
+            music?.run(SKAction.stop())
+            marioIsDead = true
+            mario.removeAllActions()
+            mario.texture = SKTexture(imageNamed: "mario_dead")
+            ground?.removeAction(forKey: "levelScroller")
+            mario.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 450))
+            run(SKAction.playSoundFileNamed("dead", waitForCompletion: true), completion: { [weak self] in
+                
+                self?.gameSceneDelegate?.gameOver()
+            })
         }
     }
 //        }
 //    }
     
     override func didMove(to view: SKView) {
+        marioIsDead = false
         
         physicsWorld.contactDelegate = self
         
@@ -56,7 +70,7 @@ class GameScene: SKScene {
 //        self.ground?.physicsBody?.affectedByGravity = false
 //        self.ground?.physicsBody?.isDynamic = false
         makeMarioRun()
-        ground?.run(SKAction.repeatForever(SKAction.moveBy(x: -200.0, y: 0.0, duration: 1.0)))
+        ground?.run(SKAction.repeatForever(SKAction.moveBy(x: -200.0, y: 0.0, duration: 1.0)), withKey: "levelScroller")
         
     }
     
@@ -65,23 +79,26 @@ class GameScene: SKScene {
     func makeMarioRun() {
         marioWalking = SKAction(named: "mario_walking")
         
-        walkAction = SKAction.repeatForever(SKAction.animate(with: [SKTexture(imageNamed: "mario_walk_1"), SKTexture(imageNamed: "mario_walk_2"), SKTexture(imageNamed: "mario_walk_3")], timePerFrame: 0.09))
+        walkAction = SKAction.repeatForever(SKAction.animate(with: [SKTexture(imageNamed: "mario_walk_1"), SKTexture(imageNamed: "mario_walk_3"), SKTexture(imageNamed: "mario_walk_2")], timePerFrame: 0.09))
         
         mario?.run(walkAction!)
         
     }
     
     func makeMarioJump() {
-        marioIsJumping = true
+        
         mario?.removeAllActions()
         mario?.texture = SKTexture(imageNamed: "mario_jump")
     }
     
     
     func touchDown(atPoint pos : CGPoint) {
-        if !marioIsJumping {
-        mario?.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 450))
-        makeMarioJump()
+        if !marioIsJumping && !marioIsDead {
+            let sound = SKAction.playSoundFileNamed("jump", waitForCompletion: true)
+            run(sound)
+            mario?.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 400))
+            marioIsJumping = true
+            makeMarioJump()
         }
 //        self.mario?.physicsBody?.velocity = CGVector(dx: 0, dy: 100)
     }

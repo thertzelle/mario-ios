@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5A35EEF01FAA78B200B31423 /* Mario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A35EEEF1FAA78B200B31423 /* Mario.swift */; };
-		5ABBD8A21FAB9AAD006E1CC5 /* mario.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5ABBD8A11FAB9AAD006E1CC5 /* mario.mp3 */; };
+		5ABBD8A41FAB9F76006E1CC5 /* jump.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5ABBD8A31FAB9F76006E1CC5 /* jump.mp3 */; };
 		5AF8AAD21FAA6A490038261B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF8AAD11FAA6A490038261B /* AppDelegate.swift */; };
 		5AF8AAD41FAA6A490038261B /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5AF8AAD31FAA6A490038261B /* GameScene.sks */; };
 		5AF8AAD81FAA6A490038261B /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AF8AAD71FAA6A490038261B /* GameScene.swift */; };
@@ -16,11 +16,14 @@
 		5AF8AADD1FAA6A490038261B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AF8AADB1FAA6A490038261B /* Main.storyboard */; };
 		5AF8AADF1FAA6A490038261B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AF8AADE1FAA6A490038261B /* Assets.xcassets */; };
 		5AF8AAE21FAA6A490038261B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AF8AAE01FAA6A490038261B /* LaunchScreen.storyboard */; };
+		5AFDBD0D1FACBD3B003DDC18 /* dead.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5AFDBD0C1FACBD3B003DDC18 /* dead.mp3 */; };
+		5AFDBD111FACD1D8003DDC18 /* underworld.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5AFDBD0F1FACD1D8003DDC18 /* underworld.mp3 */; };
+		5AFDBD121FACD1D8003DDC18 /* ground.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5AFDBD101FACD1D8003DDC18 /* ground.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5A35EEEF1FAA78B200B31423 /* Mario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mario.swift; sourceTree = "<group>"; };
-		5ABBD8A11FAB9AAD006E1CC5 /* mario.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = mario.mp3; sourceTree = "<group>"; };
+		5ABBD8A31FAB9F76006E1CC5 /* jump.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = jump.mp3; sourceTree = "<group>"; };
 		5AF8AACE1FAA6A490038261B /* Mario.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mario.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AF8AAD11FAA6A490038261B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5AF8AAD31FAA6A490038261B /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -30,6 +33,9 @@
 		5AF8AADE1FAA6A490038261B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5AF8AAE11FAA6A490038261B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5AF8AAE31FAA6A490038261B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5AFDBD0C1FACBD3B003DDC18 /* dead.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = dead.mp3; sourceTree = "<group>"; };
+		5AFDBD0F1FACD1D8003DDC18 /* underworld.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = underworld.mp3; sourceTree = "<group>"; };
+		5AFDBD101FACD1D8003DDC18 /* ground.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ground.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,13 +79,13 @@
 		5AF8AAD01FAA6A490038261B /* Mario */ = {
 			isa = PBXGroup;
 			children = (
+				5AFDBD0E1FACBD40003DDC18 /* Sounds */,
 				5A3B14D41FAA6BDB00E0A5A4 /* Main */,
 				5AF8AAE91FAA6A520038261B /* Supporting Files */,
 				5AF8AAD31FAA6A490038261B /* GameScene.sks */,
 				5AF8AADE1FAA6A490038261B /* Assets.xcassets */,
 				5AF8AAE01FAA6A490038261B /* LaunchScreen.storyboard */,
 				5AF8AAE31FAA6A490038261B /* Info.plist */,
-				5ABBD8A11FAB9AAD006E1CC5 /* mario.mp3 */,
 			);
 			path = Mario;
 			sourceTree = "<group>";
@@ -90,6 +96,17 @@
 				5AF8AAD11FAA6A490038261B /* AppDelegate.swift */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5AFDBD0E1FACBD40003DDC18 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				5AFDBD101FACD1D8003DDC18 /* ground.mp3 */,
+				5AFDBD0F1FACD1D8003DDC18 /* underworld.mp3 */,
+				5ABBD8A31FAB9F76006E1CC5 /* jump.mp3 */,
+				5AFDBD0C1FACBD3B003DDC18 /* dead.mp3 */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,9 +168,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5AFDBD121FACD1D8003DDC18 /* ground.mp3 in Resources */,
 				5AF8AADD1FAA6A490038261B /* Main.storyboard in Resources */,
 				5AF8AAD41FAA6A490038261B /* GameScene.sks in Resources */,
-				5ABBD8A21FAB9AAD006E1CC5 /* mario.mp3 in Resources */,
+				5AFDBD111FACD1D8003DDC18 /* underworld.mp3 in Resources */,
+				5AFDBD0D1FACBD3B003DDC18 /* dead.mp3 in Resources */,
+				5ABBD8A41FAB9F76006E1CC5 /* jump.mp3 in Resources */,
 				5AF8AADF1FAA6A490038261B /* Assets.xcassets in Resources */,
 				5AF8AAE21FAA6A490038261B /* LaunchScreen.storyboard in Resources */,
 			);
