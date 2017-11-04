@@ -16,11 +16,11 @@ class GameScene: SKScene {
     private var level : SKNode?
 //    private var spinnyNode : SKShapeNode?
     
-    let floorCategory: UInt32 = 0x1 << 0;
-    let marioCategory: UInt32 = 0x1 << 1;
-    let goombaCategory: UInt32 = 0x1 << 1;
-    let goombaHeadCategory: UInt32 = 0x1 << 2;
-    let flagCategory: UInt32 = 0x1 << 3;
+    let floorCategory: UInt32 = 0x1 << 1;
+    let marioCategory: UInt32 = 0x1 << 2;
+    let goombaCategory: UInt32 = 0x1 << 3;
+    let goombaHeadCategory: UInt32 = 0x1 << 4;
+    let flagCategory: UInt32 = 0x1 << 5;
     
     var marioIsJumping = false
     var marioIsDead = false
@@ -48,6 +48,30 @@ class GameScene: SKScene {
             
             self?.gameSceneDelegate?.gameOver()
         })
+    }
+    
+    func winSequence() {
+        let flag = level?.childNode(withName: "Scenery")?.childNode(withName: "Flag")
+        flag?.physicsBody = nil
+        
+        marioIsDead = true
+        
+        guard let mario = mario else { return }
+        stopAllEnemies()
+        let music = mario.childNode(withName: "music")
+        music?.run(SKAction.stop())
+        mario.removeAllActions()
+        mario.texture = SKTexture(imageNamed: "mario_jump")
+        mario.run(SKAction.moveBy(x: 150.0, y: 0.0, duration: 2.0))
+        level?.removeAction(forKey: "levelScroller")
+        run(SKAction.playSoundFileNamed("clear", waitForCompletion: true), completion: { [weak self] in
+            self?.level?.run(SKAction.moveBy(x: -385.0, y: 0.0, duration: 1.5))
+            self?.makeMarioRun()
+            self?.mario?.run(SKAction.moveBy(x: 500.0, y: 0.0, duration: 2.0), completion: {
+                self?.gameSceneDelegate?.gameOver()
+            })
+        })
+        
     }
     
     func stopAllEnemies() {
@@ -110,8 +134,8 @@ class GameScene: SKScene {
         flag?.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: flag?.frame.width ?? 0, height: flag?.frame.height ?? 0))
         flag?.physicsBody?.allowsRotation = false
         flag?.physicsBody?.categoryBitMask = flagCategory
-        flag?.physicsBody?.collisionBitMask = marioCategory
-        flag?.physicsBody?.contactTestBitMask = marioCategory
+        flag?.physicsBody?.collisionBitMask = floorCategory
+        flag?.physicsBody?.contactTestBitMask = floorCategory | marioCategory
         
     }
     
@@ -141,44 +165,14 @@ class GameScene: SKScene {
             marioIsJumping = true
             makeMarioJump()
         }
-//        self.mario?.physicsBody?.velocity = CGVector(dx: 0, dy: 100)
+
     }
-//
-//    func touchMoved(toPoint pos : CGPoint) {
-//        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-//            n.position = pos
-//            n.strokeColor = SKColor.blue
-//            self.addChild(n)
-//        }
-//    }
-//
-//    func touchUp(atPoint pos : CGPoint) {
-//        if let n = self.spinnyNode?.copy() as! SKShapeNode? {
-//            n.position = pos
-//            n.strokeColor = SKColor.red
-//            self.addChild(n)
-//        }
-//    }
+
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        if let label = self.label {
-//            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-//        }
-//
         for t in touches { self.touchDown(atPoint: t.location(in: self)) }
     }
-    
-//    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-////        for t in touches { self.touchMoved(toPoint: t.location(in: self)) }
-//    }
-//
-//    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-////        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-//    }
-//
-//    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-////        for t in touches { self.touchUp(atPoint: t.location(in: self)) }
-//    }
+
     
     deinit{
         print("GameScene deinited")
@@ -205,7 +199,8 @@ extension GameScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         
         
-        if contact.bodyA.categoryBitMask == floorCategory && contact.bodyB.categoryBitMask == marioCategory && marioIsJumping {
+        if contact.bodyA.categoryBitMask == marioCategory && contact.bodyB.categoryBitMask == floorCategory && marioIsJumping && !marioIsDead {
+            print("Touching the Ground!")
             makeMarioRun()
             marioIsJumping = false
         }
@@ -221,9 +216,15 @@ extension GameScene: SKPhysicsContactDelegate {
             })
         }
         
-        if contact.bodyA.categoryBitMask == marioCategory && contact.bodyB.categoryBitMask == goombaCategory && marioIsDead == false {
+        if contact.bodyA.categoryBitMask == marioCategory && contact.bodyB.categoryBitMask == goombaCategory && !marioIsDead {
             print("Goomba Kill")
             killMario()
+        }
+        
+        
+        if contact.bodyA.categoryBitMask == marioCategory && contact.bodyB.categoryBitMask == flagCategory {
+            print("Win Sequence")
+            winSequence()
         }
     }
 }
