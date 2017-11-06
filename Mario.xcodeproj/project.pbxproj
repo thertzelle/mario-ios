@@ -19,6 +19,7 @@
 		5AFDBD0D1FACBD3B003DDC18 /* dead.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5AFDBD0C1FACBD3B003DDC18 /* dead.mp3 */; };
 		5AFDBD111FACD1D8003DDC18 /* underworld.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5AFDBD0F1FACD1D8003DDC18 /* underworld.mp3 */; };
 		5AFDBD121FACD1D8003DDC18 /* ground.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 5AFDBD101FACD1D8003DDC18 /* ground.mp3 */; };
+		BAA7662C1FB0B77A00F1C766 /* Level.swift in Sources */ = {isa = PBXBuildFile; fileRef = BAA7662B1FB0B77A00F1C766 /* Level.swift */; };
 		BAF740881FAE658E0036CE40 /* clear.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BAF740861FAE658E0036CE40 /* clear.mp3 */; };
 		BAF740891FAE658E0036CE40 /* stomp.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BAF740871FAE658E0036CE40 /* stomp.mp3 */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,7 @@
 		5AFDBD0C1FACBD3B003DDC18 /* dead.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = dead.mp3; sourceTree = "<group>"; };
 		5AFDBD0F1FACD1D8003DDC18 /* underworld.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = underworld.mp3; sourceTree = "<group>"; };
 		5AFDBD101FACD1D8003DDC18 /* ground.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ground.mp3; sourceTree = "<group>"; };
+		BAA7662B1FB0B77A00F1C766 /* Level.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Level.swift; sourceTree = "<group>"; };
 		BAF740861FAE658E0036CE40 /* clear.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clear.mp3; sourceTree = "<group>"; };
 		BAF740871FAE658E0036CE40 /* stomp.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = stomp.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -56,10 +58,8 @@
 		5A3B14D41FAA6BDB00E0A5A4 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				5AF8AAD71FAA6A490038261B /* GameScene.swift */,
-				5AF8AAD91FAA6A490038261B /* GameViewController.swift */,
-				5AF8AADB1FAA6A490038261B /* Main.storyboard */,
-				5A35EEEF1FAA78B200B31423 /* Mario.swift */,
+				BAA7662E1FB0FC4F00F1C766 /* Scene */,
+				BAA7662D1FB0FC4800F1C766 /* View Controller */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -86,7 +86,6 @@
 				5AFDBD0E1FACBD40003DDC18 /* Sounds */,
 				5A3B14D41FAA6BDB00E0A5A4 /* Main */,
 				5AF8AAE91FAA6A520038261B /* Supporting Files */,
-				5AF8AAD31FAA6A490038261B /* GameScene.sks */,
 				5AF8AADE1FAA6A490038261B /* Assets.xcassets */,
 				5AF8AAE01FAA6A490038261B /* LaunchScreen.storyboard */,
 				5AF8AAE31FAA6A490038261B /* Info.plist */,
@@ -113,6 +112,26 @@
 				5AFDBD0C1FACBD3B003DDC18 /* dead.mp3 */,
 			);
 			path = Sounds;
+			sourceTree = "<group>";
+		};
+		BAA7662D1FB0FC4800F1C766 /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				5AF8AADB1FAA6A490038261B /* Main.storyboard */,
+				5AF8AAD91FAA6A490038261B /* GameViewController.swift */,
+			);
+			path = "View Controller";
+			sourceTree = "<group>";
+		};
+		BAA7662E1FB0FC4F00F1C766 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				5AF8AAD71FAA6A490038261B /* GameScene.swift */,
+				5A35EEEF1FAA78B200B31423 /* Mario.swift */,
+				BAA7662B1FB0B77A00F1C766 /* Level.swift */,
+				5AF8AAD31FAA6A490038261B /* GameScene.sks */,
+			);
+			path = Scene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,6 +213,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BAA7662C1FB0B77A00F1C766 /* Level.swift in Sources */,
 				5AF8AAD81FAA6A490038261B /* GameScene.swift in Sources */,
 				5AF8AADA1FAA6A490038261B /* GameViewController.swift in Sources */,
 				5A35EEF01FAA78B200B31423 /* Mario.swift in Sources */,
